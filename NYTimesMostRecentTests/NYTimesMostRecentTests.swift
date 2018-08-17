@@ -10,9 +10,10 @@ import XCTest
 @testable import NYTimesMostRecent
 
 class NYTimesMostRecentTests: XCTestCase {
-    
+    var viewModel:MostRecentViewModel!;
     override func setUp() {
         super.setUp()
+         viewModel = MostRecentViewModel()
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
@@ -21,16 +22,16 @@ class NYTimesMostRecentTests: XCTestCase {
         super.tearDown()
     }
     
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testNetworkCall() {
+        let e = expectation(description: "Network Call")
+
+        viewModel.fetchArticles(completionHandler: { result in
+        
+            XCTAssertNotNil(result)
+            
+            e.fulfill()
+
+        })
+        
     }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
 }
